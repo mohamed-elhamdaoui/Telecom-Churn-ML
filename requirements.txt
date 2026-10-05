@@ -2,6 +2,7 @@ pandas
 numpy
 matplotlib
 seaborn
+scipy
 scikit-learn
 imbalanced-learn
 xgboost
@@ -10,3 +11,4 @@ streamlit
 joblib
 jupyter
 ipykernel
+pytest

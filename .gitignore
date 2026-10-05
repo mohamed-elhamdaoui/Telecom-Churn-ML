@@ -6,4 +6,6 @@ mlartifacts/
 *.pkl
 .env
 .DS_Store
-data
+data/processed/
+models/*.joblib
+.pytest_cache/
