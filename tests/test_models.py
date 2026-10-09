@@ -51,3 +51,11 @@ def test_baseline_ne_predit_que_la_classe_majoritaire(data):
     X_train, X_test, y_train, _ = data
     pred = build_baseline().fit(X_train, y_train).predict(X_test)
     assert set(np.unique(pred)) == {0}
+
+
+def test_cv_fold_scores_une_ligne_par_pli(data):
+    from src.evaluate import cv_fold_scores, stratified_cv
+    X_train, _, y_train, _ = data
+    out = cv_fold_scores(build_pipeline("Logistic Regression", "none"), X_train, y_train, stratified_cv(3, 2))
+    assert out.shape[0] == 6                                   # 3 plis x 2 répétitions
+    assert {"roc_auc", "f1", "recall", "precision"} <= set(out.columns)

@@ -64,3 +64,11 @@ def plot_roc(fitted, X_test, y_test):
     ax.set_title("Courbes ROC (test)")
     ax.legend(loc="lower right")
     plt.show()
+
+
+def cv_fold_scores(pipeline, X, y, cv):
+    """Scores pli par pli (DataFrame : une ligne par pli, une colonne par métrique).
+    Avec le même `cv` (même random_state), les plis sont identiques d'une configuration à l'autre :
+    on peut donc comparer deux configurations pli par pli (comparaison appariée)."""
+    res = cross_validate(pipeline, X, y, cv=cv, scoring=SCORING, n_jobs=1)
+    return pd.DataFrame({m: res[f"test_{m}"] for m in SCORING})
